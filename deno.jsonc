@@ -1,5 +1,11 @@
 {
 	"tasks": {
 		"generate-openapi": "deno run -A ./tools/generate-openapi.ts"
+	},
+	"fmt": {
+		"options": {
+			"singleQuote": true,
+			"useTabs": true
+		}
 	}
 }
