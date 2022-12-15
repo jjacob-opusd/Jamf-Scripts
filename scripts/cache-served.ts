@@ -16,7 +16,7 @@ const columns = [
 ];
 
 const joinedColumns = columns.map((c) => `SUM(${c})`).join(', ');
-const commands = `.open /Library/Application\ Support/Apple/AssetCache/Metrics/Metrics.db
+const commands = `.open "/Library/Application Support/Apple/AssetCache/Metrics/Metrics.db"
 SELECT ${joinedColumns} FROM ZMETRIC;`;
 
 const output = await cmdOutput(['zsh', '-c', `echo "${commands}" | sqlite3`]);
