@@ -32,9 +32,11 @@ const hardware = await SPHardwareDataType();
 //     },
 //   },
 // ).then((res) => res.json());
-const computerResponse = await ComputersService.findComputersBySerialNumber({
-	serialnumber: hardware.serial_number,
-});
+const computerResponse = JSON.parse(
+	await ComputersService.findComputersBySerialNumber({
+		serialnumber: hardware.serial_number,
+	})
+);
 
 const buildingShortcodes = {
 	BES: 'B',
@@ -74,10 +76,10 @@ const hostname = `${buildingShortcode}-${assetTag}-${modelShortcode}`;
 
 console.log({ hostname });
 
-// console.log('Setting hostname...');
-// await cmdOutput(['scutil', '--set', 'HostName', hostname]);
-// await cmdOutput(['scutil', '--set', 'ComputerName', hostname]);
-// await cmdOutput(['scutil', '--set', 'LocalHostName', hostname]);
-// await cmdOutput(['jamf', 'recon']);
-// await cmdOutput(['jamf', 'policy']);
+console.log('Setting hostname...');
+await cmdOutput(['scutil', '--set', 'HostName', hostname]);
+await cmdOutput(['scutil', '--set', 'ComputerName', hostname]);
+await cmdOutput(['scutil', '--set', 'LocalHostName', hostname]);
+await cmdOutput(['jamf', 'recon']);
+await cmdOutput(['jamf', 'policy']);
 console.log('Done');
